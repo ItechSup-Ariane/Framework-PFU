@@ -9,14 +9,14 @@ abstract class WidgetButton extends BaseWidgetElement {
     protected $type = "button";
     protected $isMappable = false;
 
-    public function getRender() {
+    public function getRenderWidget() {
         if (empty($this->render)) {
-            $field = "<input type='" . $this->type . "'";
-            foreach ($this->listAttribut as $attr => $value) {
-                $field .= " " . $attr . "='" . $value . "'";
-            }
-            $field .= "/>";
-            $this->render = $this->getViewElement($field, $this->name, null);
+            $field = "<input name='" . $this->name
+                    . "' value='" . $this->value
+                    . "' type='" . $this->type . "' "
+                    . $this->listStringAttribut
+                    . " />";
+            $this->render = $this->getViewElement($field);
         }
         return $this->render;
     }

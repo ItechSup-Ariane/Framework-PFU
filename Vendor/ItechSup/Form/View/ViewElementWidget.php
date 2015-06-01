@@ -6,12 +6,14 @@ class ViewElementWidget {
 
     private $value;
     private $label;
-    private $error;
+    private $errors;
+    private $labelAttr;
+    private $errorsAttr;
 
-    public function __construct($value, $label, array $error = null) {
+    public function __construct($value, $label, array $errors = []) {
         $this->value = $value;
         $this->label = $label;
-        $this->error = $error;
+        $this->errors = $errors;
     }
 
     public function getValue() {
@@ -19,15 +21,19 @@ class ViewElementWidget {
     }
 
     public function getLabel() {
-        return $this->label;
+        return '<label ' . $this->labelAttr . ' >' . $this->label . '</label>';
     }
 
     public function getError() {
-        return $this->error;
+        $stringError = "";
+        foreach ($this->errors as $error) {
+            $stringError .= '<span' . $this->errorsAttr . ' >' . $error . '</span>';
+        }
+        return $stringError;
     }
 
     public function __toString() {
-        return $this->label . $this->value . $this->error;
+        //return $this->label . $this->value . $this->error;
     }
 
 }

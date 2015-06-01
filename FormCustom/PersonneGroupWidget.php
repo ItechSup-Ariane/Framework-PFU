@@ -16,13 +16,14 @@ class PersonneGroupWidget extends GroupWidget {
         $this->setDataMap($entity);
         $widgetText = new WidgetText();
         $widgetText->setName("nom");
+        $widgetText->setLabel("Nom :");
         $validatorText = new Validator();
         $validatorText->addConstraint(new ConstraintNotNull());
         $widgetText->setValidator($validatorText);
-//        $widgetText->setAttributs(array("required" => ""));
-
+        $widgetText->setAttributs(array("required" => ""));
         $widgetInteger = new WidgetInteger();
         $widgetInteger->setName("nbEnfant");
+        $widgetInteger->setLabel("Nombre d'enfant :");
         $validatorInteger = new Validator();
         $validatorInteger->addConstraint(new ConstraintNotNull());
         $validatorInteger->addConstraint(new ConstraintType("numeric"));

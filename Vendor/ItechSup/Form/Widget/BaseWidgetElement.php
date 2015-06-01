@@ -8,10 +8,13 @@ use ItechSup\Validator\Validator\Validator;
 
 abstract class BaseWidgetElement extends Widget {
 
+    protected $label;
     protected $value;
     protected $type;
     protected $render;
     protected $isMappable;
+    protected $listLabelAttribut = array();
+    protected $listStringLabelAttribut;
     private $validator;
 
     public function getValue() {
@@ -20,6 +23,14 @@ abstract class BaseWidgetElement extends Widget {
 
     public function setValue($value) {
         $this->value = $value;
+    }
+
+    public function getLabel() {
+        return $this->label;
+    }
+
+    public function setLabel($value) {
+        $this->label = $value;
     }
 
     public function setValidator(Validator $validator) {
@@ -38,9 +49,50 @@ abstract class BaseWidgetElement extends Widget {
         return $this->isMappable;
     }
 
-    protected function getViewElement($value, $label, array $error = null) {
-        return new ViewElementWidget($value, $label, $error);
+    protected function getViewElement($value, array $error = []) {
+        if (!empty($this->label)) {
+            $label = $this->label;
+        } else {
+            $label = $this->name;
+        }
+        $view = new ViewElementWidget($value, $label, $error);
+        return $view;
     }
 
-    abstract public function getRender();
+    public function getLabelAttributs() {
+        return $this->listLabelAttribut;
+    }
+
+    public function setLabelAttributs(array $listAttribut) {
+        $this->listLabelAttribut = array_merge($this->listAttribut, $listAttribut);
+    }
+
+    public function clearLabelAttributs() {
+        $this->listLabelAttribut = array();
+    }
+
+    public function getLabelAttribut($nameAttr) {
+        return $this->listLabelAttribut[$nameAttr];
+    }
+
+    public function setLabelAttribut($nameAttr, $valueAttr) {
+        return $this->listLabelAttribut[$nameAttr] = $valueAttr;
+    }
+
+    public function hasLabelAttribut($nameAttr) {
+        return isset($this->listLabelAttribut[$nameAttr]);
+    }
+
+    public function removeLabelAttribut($nameAttr) {
+        return isset($this->listLabelAttribut[$nameAttr]);
+    }
+
+    protected function prepareAttribut() {
+        parent::prepareAttribut();
+        foreach ($this->listLabelAttribut as $attr => $value) {
+            $this->listStringLabelAttribut .= " " . $attr . "='" . $value . "'";
+        }
+    }
+
+    abstract public function getRenderWidget();
 }

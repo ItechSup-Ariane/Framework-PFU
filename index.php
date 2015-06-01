@@ -12,6 +12,8 @@ use Entity\PersonneEntity;
 
 $personne = new PersonneEntity();
 $form = new FormCustom($personne);
+$form->prepare();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $form->setBindData($_POST);
     if ($form->isValid()) {
@@ -24,12 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <?= $form->openForm(); ?>
-<?= $form->getRender("nom")->getLabel(); ?>
-<?= $form->getRender("nom")->getValue(); ?>
-<?= var_dump($form->getRender("nom")->getError()); ?>
-
-<?= $form->getRender("nbEnfant")->getLabel(); ?>
-<?= $form->getRender("nbEnfant")->getValue(); ?>
-
-<?= $form->getRender("button")->getValue(); ?>
+<?php foreach ($form->getRender("personneGroupWidget") as $fieldPersonne) { ?>
+    <?= $fieldPersonne->getLabel() ?>
+    <?= $fieldPersonne->getValue() ?>
+    <?= $fieldPersonne->getError() ?>
+<?php } ?>
+<?= $form->getRender("button")->getValue() ?>
 <?= $form->closeForm(); ?>

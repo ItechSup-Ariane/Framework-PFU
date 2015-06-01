@@ -116,10 +116,11 @@ class GroupWidget extends Widget {
         }
     }
 
-    public function getRender() {
+    public function getRenderWidget() {
         $listWidgetRender = array();
         foreach ($this->listWidget as $widget) {
-            $listWidgetRender = $widget->getRender();
+            $widget->prepareAttribut();
+            $listWidgetRender[$widget->getName()] = $widget->getRenderWidget();
         }
         return $listWidgetRender;
     }

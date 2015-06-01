@@ -9,14 +9,14 @@ class WidgetText extends BaseWidgetElement {
     protected $type = "text";
     protected $isMappable = true;
 
-    public function getRender() {
+    public function getRenderWidget() {
         if (empty($this->render)) {
-            $field = "<input name='" . $this->name . "' value='" . $this->value . "' type='" . $this->type . "'";
-            foreach ($this->listAttribut as $attr => $value) {
-                $field .= " " . $attr . "='" . $value . "'";
-            }
-            $field .= "/>";
-            $this->render = $this->getViewElement($field, $this->name, $this->getValidator()->getListErrors());
+            $field = "<input name='" . $this->name
+                    . "' value='" . $this->value
+                    . "' type='" . $this->type . "' "
+                    . $this->listStringAttribut
+                    . " />";
+            $this->render = $this->getViewElement($field, $this->getValidator()->getListErrors());
         }
         return $this->render;
     }

@@ -18,6 +18,7 @@ class FormCustom extends Form {
         $personneGroupWidget->setName("personneGroupWidget");
         $widgetSubmit = new WidgetSubmit();
         $widgetSubmit->setName("button");
+        $widgetSubmit->setValue("button");
 
         $this->addWidget($widgetSubmit, 'button');
         $this->addWidget($personneGroupWidget, 'personneGroupWidget');

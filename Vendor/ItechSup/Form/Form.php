@@ -7,14 +7,21 @@ use ItechSup\Form\Exception\FormException;
 
 class Form extends GroupWidget {
 
-    public function openForm() {
-        $form = '<form';
+    private $listRender = array();
+    private $isPrepare = false;
 
-        foreach ($this->listAttribut as $attr => $value) {
-            $form .= " " . $attr . "='" . $value . "'";
+    public function openForm() {
+        if ($this->isPrepare) {
+            $form = '<form';
+
+            foreach ($this->listAttribut as $attr => $value) {
+                $form .= " " . $attr . "='" . $value . "'";
+            }
+            $form .= '>';
+            return $form;
+        } else {
+            throw new FormException('The form ' . get_class($this) . 'is not prepare');
         }
-        $form .= '>';
-        return $form;
     }
 
     public function closeForm() {
@@ -22,14 +29,27 @@ class Form extends GroupWidget {
     }
 
     public function getRender($nameWidget) {
-        if ($this->hasWidget($nameWidget)) {
-            $render = $this->listWidget[$nameWidget]->getRender();
-        } else {
-            if (empty($render)) {
-                throw new FormException($nameWidget . ' element view not exist');
+        if ($this->isPrepare) {
+            if (array_key_exists($nameWidget, $this->listRender)) {
+                return $this->listRender[$nameWidget];
+            } else {
+                throw new FormException('The widget\'s name ' . $nameWidget . ' is not exists');
             }
+        } else {
+            throw new FormException('The form ' . get_class($this) . ' is not prepare');
         }
-        return $render;
+    }
+
+    public function prepare() {
+        if (!$this->isPrepare) {
+            foreach ($this->listWidget as $widget) {
+                $widget->prepareAttribut();
+                $this->listRender[$widget->getName()] = $widget->getRenderWidget();
+            }
+            $this->isPrepare = true;
+        } else {
+            throw new FormException('The form ' . get_class($this) . ' is already prepare');
+        }
     }
 
 }
