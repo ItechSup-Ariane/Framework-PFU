@@ -36,6 +36,10 @@ class GroupWidget extends Widget {
         return $this->listWidget[$title];
     }
 
+    public function clearWidgets($title) {
+        return $this->listWidget[$title];
+    }
+
     public function setDataMap($dataMap) {
         $this->dataMap = $dataMap;
         if (is_array($dataMap)) {
@@ -43,16 +47,6 @@ class GroupWidget extends Widget {
         } elseif (is_object($dataMap)) {
             $this->typeDataMap = self::$OBJ;
         }
-    }
-
-    public function isValid() {
-        $isValid = true;
-        foreach ($this->listWidget as $widget) {
-            if (!empty($widget->getValidator())) {
-                $isValid = $widget->getValidator()->isValid($widget->getValue());
-            }
-        }
-        return $isValid;
     }
 
     public function getData() {
@@ -108,7 +102,7 @@ class GroupWidget extends Widget {
         }
     }
 
-    protected function setBindData(array $request) {
+    public function setBindData(array $request) {
         foreach ($request as $key => $value) {
             if ($this->hasWidget($key)) {
                 $this->getWidget($key)->setValue($value);
@@ -123,6 +117,16 @@ class GroupWidget extends Widget {
             $listWidgetRender[$widget->getName()] = $widget->getRenderWidget();
         }
         return $listWidgetRender;
+    }
+
+    public function isValid() {
+        $isValid = true;
+        foreach ($this->listWidget as $widget) {
+            if (!$widget->isValid()) {
+                $isValid = false;
+            }
+        }
+        return $isValid;
     }
 
 }

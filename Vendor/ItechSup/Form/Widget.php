@@ -51,7 +51,7 @@ abstract class Widget {
     }
 
     public function setErrorAttributs(array $listAttribut) {
-        $this->listErrorAttribut = array_merge($this->listAttribut, $listAttribut);
+        $this->listErrorAttribut = array_merge($this->listErrorAttribut, $listAttribut);
     }
 
     public function clearErrorAttributs() {
@@ -83,4 +83,5 @@ abstract class Widget {
         }
     }
 
+    abstract public function isValid();
 }

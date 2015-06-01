@@ -32,6 +32,22 @@ class ViewElementWidget {
         return $stringError;
     }
 
+    public function getLabelAttr() {
+        return $this->labelAttr;
+    }
+
+    public function getErrorsAttr() {
+        return $this->errorsAttr;
+    }
+
+    public function setLabelAttr($labelAttr) {
+        $this->labelAttr = $labelAttr;
+    }
+
+    public function setErrorsAttr($errorsAttr) {
+        $this->errorsAttr = $errorsAttr;
+    }
+
     public function __toString() {
         //return $this->label . $this->value . $this->error;
     }

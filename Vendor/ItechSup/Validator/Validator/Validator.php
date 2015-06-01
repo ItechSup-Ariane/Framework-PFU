@@ -37,8 +37,4 @@ class Validator {
         return $this->listError;
     }
 
-    public function setError($message) {
-        $this->listError[] = $message;
-    }
-
 }

@@ -12,25 +12,32 @@ use ItechSup\Validator\Validator\Validator;
 
 class PersonneGroupWidget extends GroupWidget {
 
+    private $nomWidget;
+    private $nbEnfantWidget;
+
     public function __construct(PersonneEntity $entity) {
         $this->setDataMap($entity);
-        $widgetText = new WidgetText();
-        $widgetText->setName("nom");
-        $widgetText->setLabel("Nom :");
+        $this->nomWidget = new WidgetText();
+        $this->nomWidget->setName("nom");
+        $this->nomWidget->setLabel("Nom :");
         $validatorText = new Validator();
         $validatorText->addConstraint(new ConstraintNotNull());
-        $widgetText->setValidator($validatorText);
-        $widgetText->setAttributs(array("required" => ""));
-        $widgetInteger = new WidgetInteger();
-        $widgetInteger->setName("nbEnfant");
-        $widgetInteger->setLabel("Nombre d'enfant :");
+        $this->nomWidget->setValidator($validatorText);
+        $this->nomWidget->setAttributs(array("class" => "form_text"));
+        $this->nomWidget->setLabelAttributs(array("class" => "form_label"));
+
+        $this->nbEnfantWidget = new WidgetInteger();
+        $this->nbEnfantWidget->setName("nbEnfant");
+        $this->nbEnfantWidget->setLabel("Nombre d'enfant :");
+        $this->nbEnfantWidget->setAttributs(array("required" => "", "class" => "form_text"));
+        $this->nbEnfantWidget->setLabelAttributs(array("class" => "form_label"));
         $validatorInteger = new Validator();
         $validatorInteger->addConstraint(new ConstraintNotNull());
         $validatorInteger->addConstraint(new ConstraintType("numeric"));
-        $widgetInteger->setValidator($validatorInteger);
+        $this->nbEnfantWidget->setValidator($validatorInteger);
 
-        $this->addWidget($widgetText, "nom")
-                ->addWidget($widgetInteger, "nbEnfant");
+        $this->addWidget($this->nomWidget, "nom")
+                ->addWidget($this->nbEnfantWidget, "nbEnfant");
     }
 
 }

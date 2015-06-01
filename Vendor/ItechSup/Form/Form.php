@@ -28,18 +28,6 @@ class Form extends GroupWidget {
         return '</form>';
     }
 
-    public function getRender($nameWidget) {
-        if ($this->isPrepare) {
-            if (array_key_exists($nameWidget, $this->listRender)) {
-                return $this->listRender[$nameWidget];
-            } else {
-                throw new FormException('The widget\'s name ' . $nameWidget . ' is not exists');
-            }
-        } else {
-            throw new FormException('The form ' . get_class($this) . ' is not prepare');
-        }
-    }
-
     public function prepare() {
         if (!$this->isPrepare) {
             foreach ($this->listWidget as $widget) {
@@ -49,6 +37,18 @@ class Form extends GroupWidget {
             $this->isPrepare = true;
         } else {
             throw new FormException('The form ' . get_class($this) . ' is already prepare');
+        }
+    }
+
+    public function getRender($nameWidget) {
+        if ($this->isPrepare) {
+            if (array_key_exists($nameWidget, $this->listRender)) {
+                return $this->listRender[$nameWidget];
+            } else {
+                throw new FormException('The widget\'s name ' . $nameWidget . ' is not exists');
+            }
+        } else {
+            throw new FormException('The form ' . get_class($this) . ' is not prepare');
         }
     }
 

@@ -56,6 +56,8 @@ abstract class BaseWidgetElement extends Widget {
             $label = $this->name;
         }
         $view = new ViewElementWidget($value, $label, $error);
+        $view->setLabelAttr($this->listStringLabelAttribut);
+        $view->setErrorsAttr($this->listStringErrorAttribut);
         return $view;
     }
 
@@ -64,7 +66,7 @@ abstract class BaseWidgetElement extends Widget {
     }
 
     public function setLabelAttributs(array $listAttribut) {
-        $this->listLabelAttribut = array_merge($this->listAttribut, $listAttribut);
+        $this->listLabelAttribut = array_merge($this->listLabelAttribut, $listAttribut);
     }
 
     public function clearLabelAttributs() {
@@ -92,6 +94,14 @@ abstract class BaseWidgetElement extends Widget {
         foreach ($this->listLabelAttribut as $attr => $value) {
             $this->listStringLabelAttribut .= " " . $attr . "='" . $value . "'";
         }
+    }
+
+    public function isValid() {
+        $isValid = true;
+        if (!empty($this->validator)) {
+            $isValid = $this->validator->isValid($this->value);
+        }
+        return $isValid;
     }
 
     abstract public function getRenderWidget();
