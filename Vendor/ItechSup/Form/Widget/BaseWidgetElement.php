@@ -10,12 +10,22 @@ abstract class BaseWidgetElement extends Widget {
 
     protected $label;
     protected $value;
+    protected $formName;
+    protected $groupName;
     protected $type;
     protected $render;
     protected $isMappable;
     protected $listLabelAttribut = array();
     protected $listStringLabelAttribut;
     private $validator;
+
+    public function getLabel() {
+        return $this->label;
+    }
+
+    public function setLabel($value) {
+        $this->label = $value;
+    }
 
     public function getValue() {
         return $this->value;
@@ -25,12 +35,20 @@ abstract class BaseWidgetElement extends Widget {
         $this->value = $value;
     }
 
-    public function getLabel() {
-        return $this->label;
+    public function getFormName() {
+        return $this->formName;
     }
 
-    public function setLabel($value) {
-        $this->label = $value;
+    public function getGroupName() {
+        return $this->groupName;
+    }
+
+    public function setFormName($formName) {
+        $this->formName = $formName;
+    }
+
+    public function setGroupName($groupName) {
+        $this->groupName = $groupName;
     }
 
     public function setValidator(Validator $validator) {

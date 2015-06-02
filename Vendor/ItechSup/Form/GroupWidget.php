@@ -103,10 +103,8 @@ class GroupWidget extends Widget {
     }
 
     public function setBindData(array $request) {
-        foreach ($request as $key => $value) {
-            if ($this->hasWidget($key)) {
-                $this->getWidget($key)->setValue($value);
-            }
+        foreach ($this->listWidget as $widget) {
+            
         }
     }
 
