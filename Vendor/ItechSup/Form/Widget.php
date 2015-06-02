@@ -9,6 +9,8 @@ abstract class Widget {
     protected $listStringAttribut = "";
     protected $listErrorAttribut = array();
     protected $listStringErrorAttribut = "";
+    protected $isGroupWidget;
+    protected $isMappable;
 
     public function getName() {
         return $this->name;
@@ -81,6 +83,14 @@ abstract class Widget {
         foreach ($this->listErrorAttribut as $attr => $value) {
             $this->listStringErrorAttribut .= " " . $attr . "='" . $value . "'";
         }
+    }
+
+    public function isGroupWidget() {
+        return $this->isGroupWidget;
+    }
+
+    public function isMappable() {
+        return $this->isMappable;
     }
 
     abstract public function isValid();

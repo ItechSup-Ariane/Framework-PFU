@@ -47,6 +47,13 @@ $form->prepare();
             </div>
         <?php } ?>
         <div class="form_block">
+            <?= $form->getRender("title")->getLabel() ?>
+            <?= $form->getRender("title")->getValue() ?>
+            <div class="form_error">
+                <?= $form->getRender("title")->getError() ?>
+            </div>
+        </div>
+        <div class="form_block">
             <?= $form->getRender("button")->getValue() ?>
         </div>
         <?= $form->closeForm(); ?>

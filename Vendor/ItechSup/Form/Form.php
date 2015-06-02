@@ -32,7 +32,6 @@ class Form extends GroupWidget {
         if (!$this->isPrepare) {
             foreach ($this->listWidget as $widget) {
                 $widget->prepareAttribut();
-                $widget->setFormName(get_class($this));
                 $this->listRender[$widget->getName()] = $widget->getRenderWidget();
             }
             $this->isPrepare = true;

@@ -12,6 +12,8 @@ class GroupWidget extends Widget {
     protected $listWidget;
     protected $dataMap;
     protected $typeDataMap;
+    protected $isMappable = false;
+    protected $isGroupWidget = true;
 
     public function addWidget(Widget $widget, $title) {
         $this->validNameWidget($widget->getName(), $title);
@@ -81,9 +83,11 @@ class GroupWidget extends Widget {
 
     protected function hydrateObject() {
         foreach ($this->listWidget as $widget) {
+            $setter = "set" . ucfirst($widget->getName());
             if ($widget->isMappable()) {
-                $setter = "set" . ucfirst($widget->getName());
                 $this->dataMap->$setter($widget->getValue());
+            } elseif ($widget->isGroupWidget()) {
+                $this->dataMap->$setter($widget->getData());
             }
         }
     }
@@ -92,6 +96,8 @@ class GroupWidget extends Widget {
         foreach ($this->listWidget as $widget) {
             if ($widget->isMappable()) {
                 $this->dataMap[$widget->getName()] = $widget->getValue();
+            } elseif ($widget->isGroupWidget()) {
+                $this->dataMap[$widget->getName()] = $widget->getData();
             }
         }
     }
@@ -104,11 +110,16 @@ class GroupWidget extends Widget {
 
     public function setBindData(array $request) {
         foreach ($this->listWidget as $widget) {
-            
+            if ($widget->isGroupWidget()) {
+                $widget->setBindData($request);
+            } elseif (array_key_exists($widget->getName(), $request)) {
+                $widget->setValue($request[$widget->getName()]);
+            }
         }
     }
 
-    public function getRenderWidget() {
+    public
+            function getRenderWidget() {
         $listWidgetRender = array();
         foreach ($this->listWidget as $widget) {
             $widget->prepareAttribut();
@@ -117,7 +128,8 @@ class GroupWidget extends Widget {
         return $listWidgetRender;
     }
 
-    public function isValid() {
+    public
+            function isValid() {
         $isValid = true;
         foreach ($this->listWidget as $widget) {
             if (!$widget->isValid()) {
