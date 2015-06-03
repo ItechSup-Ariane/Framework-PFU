@@ -12,12 +12,7 @@ class Form extends GroupWidget {
 
     public function openForm() {
         if ($this->isPrepare) {
-            $form = '<form';
-
-            foreach ($this->listAttribut as $attr => $value) {
-                $form .= " " . $attr . "='" . $value . "'";
-            }
-            $form .= '>';
+            $form = '<form' . $this->listStringAttribut . '>';
             return $form;
         } else {
             throw new FormException('The form ' . get_class($this) . 'is not prepare');
@@ -25,10 +20,15 @@ class Form extends GroupWidget {
     }
 
     public function closeForm() {
-        return '</form>';
+        if ($this->isPrepare) {
+            return '</form>';
+        } else {
+            throw new FormException('The form ' . get_class($this) . 'is not prepare');
+        }
     }
 
     public function prepare() {
+        $this->prepareAttribut();
         if (!$this->isPrepare) {
             foreach ($this->listWidget as $widget) {
                 $widget->prepareAttribut();

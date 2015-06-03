@@ -2,14 +2,17 @@
 
 namespace Entity;
 
+use Entity\AdresseEntity;
+
 class PersonneEntity {
 
     private $nom;
     private $prenom;
+    private $password;
     private $active;
     private $nbEnfant;
     private $dateNaissanse;
-    private $password;
+    private $adresse;
 
     public function getNom() {
         return $this->nom;
@@ -17,6 +20,10 @@ class PersonneEntity {
 
     public function getPrenom() {
         return $this->prenom;
+    }
+
+    public function getPassword() {
+        return $this->password;
     }
 
     public function getActive() {
@@ -31,8 +38,8 @@ class PersonneEntity {
         return $this->dateNaissanse;
     }
 
-    public function getPassword() {
-        return $this->password;
+    public function getAdresse() {
+        return $this->adresse;
     }
 
     public function setNom($nom) {
@@ -41,6 +48,10 @@ class PersonneEntity {
 
     public function setPrenom($prenom) {
         $this->prenom = $prenom;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
     }
 
     public function setActive($active) {
@@ -55,8 +66,8 @@ class PersonneEntity {
         $this->dateNaissanse = $dateNaissanse;
     }
 
-    public function setPassword($password) {
-        $this->password = $password;
+    public function setAdresse(AdresseEntity $adresse) {
+        $this->adresse = $adresse;
     }
 
 }

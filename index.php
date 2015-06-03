@@ -14,14 +14,15 @@ $form = new FormCustom($personne);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $form->setBindData($_POST);
-    if ($form->isValid()) {
-        var_dump($form->getData());
+    $isValid = $form->isValid();
+    if ($isValid) {
         $result = "Formulaire valide";
     } else {
         $result = "Formaulaire invalide";
     }
 }
 $form->prepare();
+$personne = $form->getRender("personneGroupWidget");
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,22 +38,29 @@ $form->prepare();
     </head>
     <body>
         <?= $form->openForm(); ?>
-        <?php foreach ($form->getRender("personneGroupWidget") as $fieldPersonne) { ?>
+        <div class="form_block">
+            <?= $personne["nom"]->getLabel() ?>
+            <?= $personne["nom"]->getValue() ?>
+            <div class="form_error">
+                <?= $personne["nom"]->getError() ?>
+            </div>
+        </div>
+        <div class="form_block">
+            <?= $personne["nbEnfant"]->getLabel() ?>
+            <?= $personne["nbEnfant"]->getValue() ?>
+            <div class="form_error">
+                <?= $personne["nbEnfant"]->getError() ?>
+            </div>
+        </div>
+        <?php foreach ($personne["adresse"] as $adresse) { ?>
             <div class="form_block">
-                <?= $fieldPersonne->getLabel() ?>
-                <?= $fieldPersonne->getValue() ?>
+                <?= $adresse->getLabel() ?>
+                <?= $adresse->getValue() ?>
                 <div class="form_error">
-                    <?= $fieldPersonne->getError() ?>
+                    <?= $adresse->getError() ?>
                 </div>
             </div>
         <?php } ?>
-        <div class="form_block">
-            <?= $form->getRender("title")->getLabel() ?>
-            <?= $form->getRender("title")->getValue() ?>
-            <div class="form_error">
-                <?= $form->getRender("title")->getError() ?>
-            </div>
-        </div>
         <div class="form_block">
             <?= $form->getRender("button")->getValue() ?>
         </div>

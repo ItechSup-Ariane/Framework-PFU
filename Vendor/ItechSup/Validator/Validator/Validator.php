@@ -20,6 +20,22 @@ class Validator {
         $this->listConstraint[] = $constraint;
     }
 
+    public function getConstraints() {
+        return $this->listConstraint;
+    }
+
+    public function getConstraint() {
+        return $this->listConstraint;
+    }
+
+    public function removeConstraint() {
+        return $this->listConstraint;
+    }
+
+    public function clearConstraint() {
+        $this->listConstraint = array();
+    }
+
     public function isValid($value) {
         $isValid = true;
         foreach ($this->listConstraint as $constraint) {
