@@ -7,10 +7,11 @@ use ItechSup\Validator\Constraint\Exception\ConstraintException;
 
 class ConstraintRegex extends Constraint {
 
+    protected $messageError = "La ne peut pas être vide";
     private $regex;
 
     public function __construct() {
-        $this->messageError = "La ne peut pas être vide";
+        
     }
 
     public function isValid($value) {

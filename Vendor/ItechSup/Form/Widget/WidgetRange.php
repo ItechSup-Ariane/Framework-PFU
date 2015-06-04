@@ -4,20 +4,15 @@ namespace ItechSup\Form\Widget;
 
 use ItechSup\Form\Widget\BaseWidgetElement;
 
-class WidgetCheckBox extends BaseWidgetElement {
+class WidgetRange extends BaseWidgetElement {
 
-    protected $type = "checkbox";
+    protected $type = "text";
     protected $isMappable = true;
 
     public function getRenderWidget() {
         if (empty($this->render)) {
-            $isChecked = "";
-            if ($this->type) {
-                $isChecked = "checked";
-            }
             $field = "<input name='" . $this->name
-                    . "' value='true'"
-                    . " " . $isChecked
+                    . "' value='" . $this->value
                     . "' type='" . $this->type . "' "
                     . $this->listStringAttribut
                     . " />";

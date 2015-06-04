@@ -29,10 +29,10 @@ $personne = $form->getRender("personneGroupWidget");
     <head>
         <meta charset='utf-8'>
         <style type="text/css">
-            body, html {margin: 0; padding: 0;}
-            form {background-color: blue; margin-left: 25%; margin-right: 25%; width: 50%;}
+            body, html {margin: 0; padding: 0; background-color: aquamarine}
+            form{position: absolute; background-color: azure; margin-left: 25%; margin-right: 25%; top: 25%; bottom: 25%; width: 50%;}
             .form_block{margin-left: 25%; margin-right: 25%; padding-bottom: 10px; padding-top: 10px; width: 50%;}
-            .form_label{display: inline-block; color: whitesmoke; width: 50%;            }
+            .form_label{display: inline-block; color: aquamarine; width: 50%;            }
             .form_error span{display:block; color: red;}
         </style>
     </head>

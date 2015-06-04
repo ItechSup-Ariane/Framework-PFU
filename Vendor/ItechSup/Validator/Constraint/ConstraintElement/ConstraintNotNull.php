@@ -7,8 +7,10 @@ use ItechSup\Validator\Constraint\Exception\ConstraintException;
 
 class ConstraintNotNull extends Constraint {
 
+    protected $messageError = "The fields must not be null";
+
     public function __construct() {
-        $this->messageError = "The fields must not be null";
+        
     }
 
     public function isValid($value) {

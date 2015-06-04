@@ -7,8 +7,11 @@ use ItechSup\Validator\Constraint\Exception\ConstraintException;
 
 class ConstraintNumeric extends Constraint {
 
-    public function __construct() {
-        $this->messageError = "La ne peut pas être vide";
+    protected $messageError = "La ne peut pas être vide";
+    protected $compareTo;
+
+    public function __construct($compareTo) {
+        $this->compareTo = $compareTo;
     }
 
     public function isValid($value) {

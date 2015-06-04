@@ -24,8 +24,8 @@ class Validator {
         return $this->listConstraint;
     }
 
-    public function getConstraint() {
-        return $this->listConstraint;
+    public function getConstraint($index) {
+        return $this->listConstraint[$index];
     }
 
     public function removeConstraint() {
