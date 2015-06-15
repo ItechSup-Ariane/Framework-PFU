@@ -9,6 +9,7 @@ use ItechSup\Form\Exception\FormException;
  */
 class GroupWidget extends Widget
 {
+
     private static $array = 'array';
     private static $obj = 'object';
     protected $listWidget;
@@ -106,10 +107,9 @@ class GroupWidget extends Widget
     {
         if ($this->typeDataMap == self::$obj) {
             $this->hydrateObject();
-        } elseif ($this->typeDataMap == self::$array) {
+        } elseif ($this->typeDataMap == self::$array || $this->typeDataMap == null) {
             $this->hydrateArray();
         }
-
         return $this->dataMap;
     }
 
@@ -119,7 +119,7 @@ class GroupWidget extends Widget
     protected function isMappedKeyArray($key)
     {
         if (!array_key_exists($key, $this->dataMap)) {
-            throw new FormException($key.' is not mapped in Array');
+            throw new FormException($key . ' is not mapped in Array');
         }
     }
 
@@ -132,13 +132,13 @@ class GroupWidget extends Widget
         $ucfGetter = ucfirst($getter);
         $listPrefixGetter = ['get', 'is', 'has'];
         foreach ($listPrefixGetter as $prefixGetter) {
-            if (method_exists($this->dataMap, $prefixGetter.$ucfGetter)) {
+            if (method_exists($this->dataMap, $prefixGetter . $ucfGetter)) {
                 $isExists = true;
                 break;
             }
         }
         if (!$isExists) {
-            throw new FormException($getter.' is not mapped in '.get_class($this->dataMap));
+            throw new FormException($getter . ' is not mapped in ' . get_class($this->dataMap));
         }
     }
 
@@ -148,7 +148,7 @@ class GroupWidget extends Widget
     protected function hydrateObject()
     {
         foreach ($this->listWidget as $widget) {
-            $setter = 'set'.ucfirst($widget->getName());
+            $setter = 'set' . ucfirst($widget->getName());
             if ($widget->isMappable()) {
                 $this->dataMap->$setter($widget->getValue());
             } elseif ($widget->isGroupWidget()) {
@@ -228,4 +228,5 @@ class GroupWidget extends Widget
 
         return $isValid;
     }
+
 }
