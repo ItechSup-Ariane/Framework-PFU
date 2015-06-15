@@ -7,7 +7,7 @@ use \Exception;
 class FormException extends Exception
 {
 
-    private $message;
+    protected $message;
 
     public function __construct($message)
     {
