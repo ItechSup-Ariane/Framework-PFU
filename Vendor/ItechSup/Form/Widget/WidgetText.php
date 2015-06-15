@@ -16,7 +16,7 @@ class WidgetText extends BaseWidgetElement
             $field = "<input name='" . $this->name
                     . "' value='" . $this->value
                     . "' type='" . $this->type . "' "
-                    . $this->listStringAttribut
+                    . $this->listStrAttribut
                     . " />";
             $this->render = $this->getViewElement($field, $this->getValidator()->getListErrors());
         }

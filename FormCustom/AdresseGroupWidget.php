@@ -12,7 +12,7 @@ class AdresseGroupWidget extends GroupWidget
 {
 
     private $adresseWidget;
-    private $cpWidget;
+    private $codePostalWidget;
     private $villeWidget;
 
     public function __construct(AdresseEntity $entity)
@@ -25,11 +25,11 @@ class AdresseGroupWidget extends GroupWidget
         $this->adresseWidget->setAttributs(array("class" => "form_text"));
         $this->adresseWidget->setLabelAttributs(array("class" => "form_label"));
 
-        $this->cpWidget = new WidgetText();
-        $this->cpWidget->setName("cp");
-        $this->cpWidget->setLabel("Code postale :");
-        $this->cpWidget->setAttributs(array("class" => "form_text"));
-        $this->cpWidget->setLabelAttributs(array("class" => "form_label"));
+        $this->codePostalWidget = new WidgetText();
+        $this->codePostalWidget->setName("codePostal");
+        $this->codePostalWidget->setLabel("Code postale :");
+        $this->codePostalWidget->setAttributs(array("class" => "form_text"));
+        $this->codePostalWidget->setLabelAttributs(array("class" => "form_label"));
 
         $this->villeWidget = new WidgetText();
         $this->villeWidget->setName("ville");
@@ -47,12 +47,12 @@ class AdresseGroupWidget extends GroupWidget
         $validatorVille->addConstraint(new ConstraintNotNull());
 
         $this->adresseWidget->setValidator($validatorAdesse);
-        $this->cpWidget->setValidator($validatorCp);
+        $this->codePostalWidget->setValidator($validatorCp);
         $this->villeWidget->setValidator($validatorVille);
 
 
         $this->addWidget($this->adresseWidget, "adresse")
-                ->addWidget($this->cpWidget, "cp")
+                ->addWidget($this->codePostalWidget, "codePostal")
                 ->addWidget($this->villeWidget, "ville");
     }
 

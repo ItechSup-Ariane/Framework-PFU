@@ -14,7 +14,7 @@ class Form extends GroupWidget
     public function openForm()
     {
         if ($this->isPrepare) {
-            $form = '<form' . $this->listStringAttribut . '>';
+            $form = '<form' . $this->listStrAttribut . '>';
             return $form;
         }
         throw new FormException('The form ' . get_class($this) . 'is not prepare');
@@ -31,14 +31,14 @@ class Form extends GroupWidget
     public function prepare()
     {
         $this->prepareAttribut();
-        if (!$this->isPrepare) {
-            foreach ($this->listWidget as $widget) {
-                $widget->prepareAttribut();
-                $this->listRender[$widget->getName()] = $widget->getRenderWidget();
-            }
-            $this->isPrepare = true;
+        if ($this->isPrepare) {
+            throw new FormException('The form ' . get_class($this) . ' is already prepare');
         }
-        throw new FormException('The form ' . get_class($this) . ' is already prepare');
+        foreach ($this->listWidget as $widget) {
+            $widget->prepareAttribut();
+            $this->listRender[$widget->getName()] = $widget->getRenderWidget();
+        }
+        $this->isPrepare = true;
     }
 
     public function getRender($nameWidget)

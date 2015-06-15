@@ -21,7 +21,7 @@ class WidgetCheckBox extends BaseWidgetElement
                     . "' value='true'"
                     . " " . $isChecked
                     . "' type='" . $this->type . "' "
-                    . $this->listStringAttribut
+                    . $this->listStrAttribut
                     . " />";
             $errors = [];
             if (!empty($this->getValidator())) {

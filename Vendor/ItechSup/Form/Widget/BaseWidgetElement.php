@@ -97,7 +97,7 @@ abstract class BaseWidgetElement extends Widget
         }
         $view = new ViewElementWidget($value, $this->label, $error);
         $view->setLabelAttr($this->listStrErrorAttribut);
-        $view->setErrorsAttr($this->listStringErrorAttribut);
+        $view->setErrorsAttr($this->listStrErrorAttribut);
         return $view;
     }
 

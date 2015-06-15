@@ -136,7 +136,7 @@ class WidgetChoice extends BaseWidgetElement
         if ($this->isMultiple()) {
             $nameList .= "[]";
         }
-        $this->field = "<select name=" . $nameList . " " . $this->listStringAttribut . ">";
+        $this->field = "<select name=" . $nameList . " " . $this->listStrAttribut . ">";
         foreach ($this->choiceValue as $name => $value) {
             $selected = "";
             if ($this->isSelected($value)) {
@@ -165,7 +165,7 @@ class WidgetChoice extends BaseWidgetElement
                     . "' value='" . $value . "'"
                     . " " . $isChecked
                     . " type='" . $this->typeList . "' "
-                    . $this->listStringAttribut
+                    . $this->listStrAttribut
                     . " />";
         }
     }

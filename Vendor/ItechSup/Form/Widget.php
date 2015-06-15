@@ -10,7 +10,7 @@ abstract class Widget
 
     protected $name;
     protected $listAttribut = array();
-    protected $listStringAttribut = "";
+    protected $listStrAttribut = "";
     protected $listErrorAttribut = array();
     protected $listStrErrorAttribut = "";
     protected $isGroupWidget;
@@ -173,7 +173,7 @@ abstract class Widget
     protected function prepareAttribut()
     {
         foreach ($this->listAttribut as $attr => $value) {
-            $this->listStringAttribut .= " " . $attr . "='" . $value . "'";
+            $this->listStrAttribut .= " " . $attr . "='" . $value . "'";
         }
         foreach ($this->listErrorAttribut as $attr => $value) {
             $this->listStrErrorAttribut .= " " . $attr . "='" . $value . "'";
