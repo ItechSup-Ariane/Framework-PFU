@@ -6,9 +6,11 @@ use FormCustom\PersonneGroupWidget;
 use ItechSup\Form\Form;
 use ItechSup\Form\Widget\WidgetSubmit;
 
-class FormCustom extends Form {
+class FormCustom extends Form
+{
 
-    public function __construct($dataMap) {
+    public function __construct($dataMap)
+    {
         $attributForm = ["id" => "test_form",
             "class" => "test_class",
             "action" => "",

@@ -8,13 +8,15 @@ use ItechSup\Form\Widget\WidgetText;
 use ItechSup\Validator\Constraint\ConstraintElement\ConstraintNotNull;
 use ItechSup\Validator\Validator\Validator;
 
-class AdresseGroupWidget extends GroupWidget {
+class AdresseGroupWidget extends GroupWidget
+{
 
     private $adresseWidget;
     private $cpWidget;
     private $villeWidget;
 
-    public function __construct(AdresseEntity $entity) {
+    public function __construct(AdresseEntity $entity)
+    {
         $this->setDataMap($entity);
 
         $this->adresseWidget = new WidgetText();

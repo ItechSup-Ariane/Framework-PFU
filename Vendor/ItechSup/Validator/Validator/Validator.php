@@ -5,38 +5,46 @@ namespace ItechSup\Validator\Validator;
 use ItechSup\Validator\Constraint\Exception\ConstraintException;
 use ItechSup\Validator\Constraint\Constraint;
 
-class Validator {
+class Validator
+{
 
     private $listConstraint;
     private $listError;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->listConstraint = array();
         $this->listError = array();
     }
 
-    public function addConstraint(Constraint $constraint) {
+    public function addConstraint(Constraint $constraint)
+    {
         $constraint->addValidator($this);
         $this->listConstraint[] = $constraint;
     }
 
-    public function getConstraints() {
+    public function getConstraints()
+    {
         return $this->listConstraint;
     }
 
-    public function getConstraint($index) {
+    public function getConstraint($index)
+    {
         return $this->listConstraint[$index];
     }
 
-    public function removeConstraint() {
+    public function removeConstraint()
+    {
         return $this->listConstraint;
     }
 
-    public function clearConstraint() {
+    public function clearConstraint()
+    {
         $this->listConstraint = array();
     }
 
-    public function isValid($value) {
+    public function isValid($value)
+    {
         $isValid = true;
         foreach ($this->listConstraint as $constraint) {
             try {
@@ -49,7 +57,8 @@ class Validator {
         return $isValid;
     }
 
-    public function getListErrors() {
+    public function getListErrors()
+    {
         return $this->listError;
     }
 

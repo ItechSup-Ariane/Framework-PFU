@@ -16,15 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $form->setBindData($_POST);
     $isValid = $form->isValid();
     if ($isValid) {
+        var_dump($form->getData());
         $result = "Formulaire valide";
     } else {
         $result = "Formaulaire invalide";
     }
 }
 $form->prepare();
-$personne = $form->getRender("personneGroupWidget");
+$personneRender = $form->getRender("personneGroupWidget");
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html5>
 <html>
     <head>
         <meta charset='utf-8'>
@@ -39,20 +40,34 @@ $personne = $form->getRender("personneGroupWidget");
     <body>
         <?= $form->openForm(); ?>
         <div class="form_block">
-            <?= $personne["nom"]->getLabel() ?>
-            <?= $personne["nom"]->getValue() ?>
+            <?= $personneRender["nom"]->getLabel() ?>
+            <?= $personneRender["nom"]->getValue() ?>
             <div class="form_error">
-                <?= $personne["nom"]->getError() ?>
+                <?= $personneRender["nom"]->getError() ?>
             </div>
         </div>
         <div class="form_block">
-            <?= $personne["nbEnfant"]->getLabel() ?>
-            <?= $personne["nbEnfant"]->getValue() ?>
+            <?= $personneRender["active"]->getLabel() ?>
+            <?= $personneRender["active"]->getValue() ?>
             <div class="form_error">
-                <?= $personne["nbEnfant"]->getError() ?>
+                <?= $personneRender["active"]->getError() ?>
             </div>
         </div>
-        <?php foreach ($personne["adresse"] as $adresse) { ?>
+        <div class="form_block">
+            <?= $personneRender["nbEnfant"]->getLabel() ?>
+            <?= $personneRender["nbEnfant"]->getValue() ?>
+            <div class="form_error">
+                <?= $personneRender["nbEnfant"]->getError() ?>
+            </div>
+        </div>
+        <div class="form_block">
+            <?= $personneRender["poste"]->getLabel() ?>
+            <?= $personneRender["poste"]->getValue() ?>
+            <div class="form_error">
+                <?= $personneRender["nbEnfant"]->getError() ?>
+            </div>
+        </div>
+        <?php foreach ($personneRender["adresse"] as $adresse) { ?>
             <div class="form_block">
                 <?= $adresse->getLabel() ?>
                 <?= $adresse->getValue() ?>

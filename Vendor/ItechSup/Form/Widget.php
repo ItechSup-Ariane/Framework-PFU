@@ -2,7 +2,8 @@
 
 namespace ItechSup\Form;
 
-abstract class Widget {
+abstract class Widget
+{
 
     protected $name;
     protected $listAttribut = array();
@@ -12,71 +13,88 @@ abstract class Widget {
     protected $isGroupWidget;
     protected $isMappable;
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    public function getAttributs() {
+    public function getAttributs()
+    {
         return $this->listAttribut;
     }
 
-    public function setAttributs(array $listAttribut) {
+    public function setAttributs(array $listAttribut)
+    {
         $this->listAttribut = array_merge($this->listAttribut, $listAttribut);
     }
 
-    public function clearAttributs() {
+    public function clearAttributs()
+    {
         $this->listAttribut = array();
     }
 
-    public function getAttribut($nameAttr) {
+    public function getAttribut($nameAttr)
+    {
         return $this->listAttribut[$nameAttr];
     }
 
-    public function setAttribut($nameAttr, $valueAttr) {
+    public function setAttribut($nameAttr, $valueAttr)
+    {
         return $this->listAttribut[$nameAttr] = $valueAttr;
     }
 
-    public function hasAttribut($nameAttr) {
+    public function hasAttribut($nameAttr)
+    {
         return isset($this->listAttribut[$nameAttr]);
     }
 
-    public function removeAttribut($nameAttr) {
+    public function removeAttribut($nameAttr)
+    {
         return isset($this->listAttribut[$nameAttr]);
     }
 
-    public function getErrorAttributs() {
+    public function getErrorAttributs()
+    {
         return $this->listErrorAttribut;
     }
 
-    public function setErrorAttributs(array $listAttribut) {
+    public function setErrorAttributs(array $listAttribut)
+    {
         $this->listErrorAttribut = array_merge($this->listErrorAttribut, $listAttribut);
     }
 
-    public function clearErrorAttributs() {
+    public function clearErrorAttributs()
+    {
         $this->listErrorAttribut = array();
     }
 
-    public function getErrorAttribut($nameAttr) {
+    public function getErrorAttribut($nameAttr)
+    {
         return $this->listErrorAttribut[$nameAttr];
     }
 
-    public function setErrorAttribut($nameAttr, $valueAttr) {
+    public function setErrorAttribut($nameAttr, $valueAttr)
+    {
         return $this->listErrorAttribut[$nameAttr] = $valueAttr;
     }
 
-    public function hasErrorAttribut($nameAttr) {
+    public function hasErrorAttribut($nameAttr)
+    {
         return isset($this->listErrorAttribut[$nameAttr]);
     }
 
-    public function removeErrorAttribut($nameAttr) {
+    public function removeErrorAttribut($nameAttr)
+    {
         return isset($this->listErrorAttribut[$nameAttr]);
     }
 
-    protected function prepareAttribut() {
+    protected function prepareAttribut()
+    {
         foreach ($this->listAttribut as $attr => $value) {
             $this->listStringAttribut .= " " . $attr . "='" . $value . "'";
         }
@@ -85,11 +103,13 @@ abstract class Widget {
         }
     }
 
-    public function isGroupWidget() {
+    public function isGroupWidget()
+    {
         return $this->isGroupWidget;
     }
 
-    public function isMappable() {
+    public function isMappable()
+    {
         return $this->isMappable;
     }
 

@@ -5,12 +5,14 @@ namespace ItechSup\Form;
 use ItechSup\Form\GroupWidget;
 use ItechSup\Form\Exception\FormException;
 
-class Form extends GroupWidget {
+class Form extends GroupWidget
+{
 
     private $listRender = array();
     private $isPrepare = false;
 
-    public function openForm() {
+    public function openForm()
+    {
         if ($this->isPrepare) {
             $form = '<form' . $this->listStringAttribut . '>';
             return $form;
@@ -19,7 +21,8 @@ class Form extends GroupWidget {
         }
     }
 
-    public function closeForm() {
+    public function closeForm()
+    {
         if ($this->isPrepare) {
             return '</form>';
         } else {
@@ -27,7 +30,8 @@ class Form extends GroupWidget {
         }
     }
 
-    public function prepare() {
+    public function prepare()
+    {
         $this->prepareAttribut();
         if (!$this->isPrepare) {
             foreach ($this->listWidget as $widget) {
@@ -40,7 +44,8 @@ class Form extends GroupWidget {
         }
     }
 
-    public function getRender($nameWidget) {
+    public function getRender($nameWidget)
+    {
         if ($this->isPrepare) {
             if (array_key_exists($nameWidget, $this->listRender)) {
                 return $this->listRender[$nameWidget];

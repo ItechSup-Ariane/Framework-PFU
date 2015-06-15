@@ -4,21 +4,28 @@ namespace FormCustom;
 
 use Entity\PersonneEntity;
 use Entity\AdresseEntity;
-use FormCustom\AdresseGroupWidget;
-use ItechSup\Form\GroupWidget;
 use ItechSup\Form\Widget\WidgetInteger;
+use ItechSup\Form\Widget\WidgetChoice;
+use ItechSup\Form\Widget\WidgetCheckBox;
 use ItechSup\Form\Widget\WidgetText;
+use ItechSup\Form\GroupWidget;
 use ItechSup\Validator\Constraint\ConstraintElement\ConstraintNotNull;
 use ItechSup\Validator\Constraint\ConstraintElement\ConstraintType;
 use ItechSup\Validator\Validator\Validator;
+use FormCustom\AdresseGroupWidget;
 
-class PersonneGroupWidget extends GroupWidget {
+class PersonneGroupWidget extends GroupWidget
+{
 
     private $nomWidget;
+    private $statusWidget;
     private $nbEnfantWidget;
+    private $isActiveWidget;
     private $adresseGroupWidget;
+    private $posteWidget;
 
-    public function __construct(PersonneEntity $entity) {
+    public function __construct(PersonneEntity $entity)
+    {
         $this->setDataMap($entity);
         $this->nomWidget = new WidgetText();
         $this->nomWidget->setName("nom");
@@ -32,8 +39,22 @@ class PersonneGroupWidget extends GroupWidget {
         $this->nbEnfantWidget->setAttributs(array("required" => "", "class" => "form_text"));
         $this->nbEnfantWidget->setLabelAttributs(array("class" => "form_label"));
 
+        $this->isActiveWidget = new WidgetCheckBox();
+        $this->isActiveWidget->setName("active");
+        $this->isActiveWidget->setLabel("Actif :");
+        $this->isActiveWidget->setAttributs(array("class" => "form_text"));
+        $this->isActiveWidget->setLabelAttributs(array("class" => "form_label"));
+
         $this->adresseGroupWidget = new AdresseGroupWidget(new AdresseEntity());
         $this->adresseGroupWidget->setName("adresse");
+
+        $this->posteWidget = new WidgetChoice();
+        $this->posteWidget->setName("poste");
+        $this->posteWidget->setMultiple(true);
+        $this->posteWidget->setExpanded(true);
+        $this->posteWidget->setAttributs(array("class" => "form_text"));
+        $this->posteWidget->setLabelAttributs(array("class" => "form_label"));
+        $this->posteWidget->setChoiceValue(array("Developpeur" => "dev", "Technicien reseau" => "tech"));
 
         $validatorText = new Validator();
         $validatorText->addConstraint(new ConstraintNotNull());
@@ -47,6 +68,8 @@ class PersonneGroupWidget extends GroupWidget {
 
         $this->addWidget($this->nomWidget, "nom")
                 ->addWidget($this->nbEnfantWidget, "nbEnfant")
+                ->addWidget($this->isActiveWidget, "active")
+                ->addWidget($this->posteWidget, "poste")
                 ->addWidget($this->adresseGroupWidget, "adresse");
     }
 

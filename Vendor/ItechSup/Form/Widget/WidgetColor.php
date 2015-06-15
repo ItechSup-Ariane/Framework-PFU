@@ -4,12 +4,14 @@ namespace ItechSup\Form\Widget;
 
 use ItechSup\Form\Widget\BaseWidgetElement;
 
-abstract class WidgetColor extends BaseWidgetElement {
+abstract class WidgetColor extends BaseWidgetElement
+{
 
     protected $type = "button";
     protected $isMappable = false;
 
-    public function getRenderWidget() {
+    public function getRenderWidget()
+    {
         if (empty($this->render)) {
             $field = "<input name='" . $this->name
                     . "' value='" . $this->value

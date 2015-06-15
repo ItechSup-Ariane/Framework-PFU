@@ -4,13 +4,16 @@ namespace ItechSup\Form\Exception;
 
 use \Exception;
 
-class FormException extends Exception {
+class FormException extends Exception
+{
 
-    public function __construct($message) {
+    public function __construct($message)
+    {
         parent::__construct($message);
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->message;
     }
 

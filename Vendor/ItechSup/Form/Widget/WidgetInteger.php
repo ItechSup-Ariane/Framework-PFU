@@ -4,12 +4,14 @@ namespace ItechSup\Form\Widget;
 
 use ItechSup\Form\Widget\BaseWidgetElement;
 
-class WidgetInteger extends BaseWidgetElement {
+class WidgetInteger extends BaseWidgetElement
+{
 
     protected $type = "number";
     protected $isMappable = true;
 
-    public function getRenderWidget() {
+    public function getRenderWidget()
+    {
         if (empty($this->render)) {
             $field = "<input name='" . $this->name
                     . "' value='" . $this->value
