@@ -2,11 +2,8 @@
 
 namespace Entity;
 
-use Entity\AdresseEntity;
-
 class PersonneEntity
 {
-
     private $nom;
     private $prenom;
     private $status;
@@ -106,5 +103,4 @@ class PersonneEntity
     {
         $this->status = $status;
     }
-
 }

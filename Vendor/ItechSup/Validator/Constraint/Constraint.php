@@ -6,7 +6,6 @@ use ItechSup\Validator\Validator\Validator;
 
 abstract class Constraint
 {
-
     protected $messageError;
     protected $validator;
     protected $compareTo;
@@ -16,6 +15,7 @@ abstract class Constraint
     public function addValidator(Validator $validator)
     {
         $this->validator = $validator;
+
         return $this;
     }
 
@@ -38,5 +38,4 @@ abstract class Constraint
     {
         $this->compareTo = $compareTo;
     }
-
 }

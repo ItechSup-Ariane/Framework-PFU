@@ -4,7 +4,6 @@ namespace ItechSup\Form\View;
 
 class ViewElementWidget
 {
-
     private $value;
     private $label;
     private $errors;
@@ -25,15 +24,16 @@ class ViewElementWidget
 
     public function getLabel()
     {
-        return '<label ' . $this->labelAttr . ' >' . $this->label . '</label>';
+        return '<label '.$this->labelAttr.' >'.$this->label.'</label>';
     }
 
     public function getError()
     {
-        $stringError = "";
+        $stringError = '';
         foreach ($this->errors as $error) {
-            $stringError .= '<span' . $this->errorsAttr . ' >' . $error . '</span>';
+            $stringError .= '<span'.$this->errorsAttr.' >'.$error.'</span>';
         }
+
         return $stringError;
     }
 
@@ -61,5 +61,4 @@ class ViewElementWidget
     {
         //return $this->label . $this->value . $this->error;
     }
-
 }

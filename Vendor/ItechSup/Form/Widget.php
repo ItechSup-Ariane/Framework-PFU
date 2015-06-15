@@ -3,21 +3,21 @@
 namespace ItechSup\Form;
 
 /**
- *  The element widget is basic class element for a form
+ *  The element widget is basic class element for a form.
  */
 abstract class Widget
 {
-
     protected $name;
     protected $listAttribut = array();
-    protected $listStrAttribut = "";
+    protected $listStrAttribut = '';
     protected $listErrorAttribut = array();
-    protected $listStrErrorAttribut = "";
+    protected $listStrErrorAttribut = '';
     protected $isGroupWidget;
     protected $isMappable;
 
     /**
-     * get the name's widget
+     * get the name's widget.
+     *
      * @return string
      */
     public function getName()
@@ -26,7 +26,8 @@ abstract class Widget
     }
 
     /**
-     * set the name's widget
+     * set the name's widget.
+     *
      * @param string $name
      */
     public function setName($name)
@@ -35,7 +36,8 @@ abstract class Widget
     }
 
     /**
-     * return list's attribut
+     * return list's attribut.
+     *
      * @return array
      */
     public function getAttributs()
@@ -44,7 +46,8 @@ abstract class Widget
     }
 
     /**
-     * set a list attribut
+     * set a list attribut.
+     *
      * @param array $listAttribut
      */
     public function setAttributs(array $listAttribut)
@@ -53,7 +56,7 @@ abstract class Widget
     }
 
     /**
-     * clear the list attribut
+     * clear the list attribut.
      */
     public function clearAttributs()
     {
@@ -61,8 +64,10 @@ abstract class Widget
     }
 
     /**
-     * get a attribut
+     * get a attribut.
+     *
      * @param string $nameAttr
+     *
      * @return string
      */
     public function getAttribut($nameAttr)
@@ -71,8 +76,9 @@ abstract class Widget
     }
 
     /**
-     * set a attribut
-     * @param string $nameAttr name's attribut
+     * set a attribut.
+     *
+     * @param string $nameAttr  name's attribut
      * @param string $valueAttr value's attribut
      */
     public function setAttribut($nameAttr, $valueAttr)
@@ -81,8 +87,10 @@ abstract class Widget
     }
 
     /**
-     * check if attribut exist
+     * check if attribut exist.
+     *
      * @param string $nameAttr name's attribut
+     *
      * @return string
      */
     public function hasAttribut($nameAttr)
@@ -91,8 +99,10 @@ abstract class Widget
     }
 
     /**
-     * Remove a attribut
+     * Remove a attribut.
+     *
      * @param string $nameAttr name's attribut
+     *
      * @return string
      */
     public function removeAttribut($nameAttr)
@@ -101,7 +111,8 @@ abstract class Widget
     }
 
     /**
-     * get list error attribut
+     * get list error attribut.
+     *
      * @return array
      */
     public function getErrorAttributs()
@@ -110,8 +121,9 @@ abstract class Widget
     }
 
     /**
-     * set list error attribut
-     * @param array $listAttribut 
+     * set list error attribut.
+     *
+     * @param array $listAttribut
      */
     public function setErrorAttributs(array $listAttribut)
     {
@@ -119,7 +131,7 @@ abstract class Widget
     }
 
     /**
-     * clear list error attribut
+     * clear list error attribut.
      */
     public function clearErrorAttributs()
     {
@@ -127,8 +139,10 @@ abstract class Widget
     }
 
     /**
-     * get a error attribut
+     * get a error attribut.
+     *
      * @param string $nameAttr name's attribut
+     *
      * @return string
      */
     public function getErrorAttribut($nameAttr)
@@ -137,9 +151,11 @@ abstract class Widget
     }
 
     /**
-     * set a error attribut
-     * @param string $nameAttr name's attribut
+     * set a error attribut.
+     *
+     * @param string $nameAttr  name's attribut
      * @param string $valueAttr value's attribut
+     *
      * @return string
      */
     public function setErrorAttribut($nameAttr, $valueAttr)
@@ -148,9 +164,11 @@ abstract class Widget
     }
 
     /**
-     * check if attribut exist
+     * check if attribut exist.
+     *
      * @param string $nameAttr name's attribut
-     * @return boolean
+     *
+     * @return bool
      */
     public function hasErrorAttribut($nameAttr)
     {
@@ -158,8 +176,10 @@ abstract class Widget
     }
 
     /**
-     * Remove a attribut
+     * Remove a attribut.
+     *
      * @param string $nameAttr name's attribut
+     *
      * @return string
      */
     public function removeErrorAttribut($nameAttr)
@@ -168,21 +188,22 @@ abstract class Widget
     }
 
     /**
-     * prepare the lists attribut
+     * prepare the lists attribut.
      */
     protected function prepareAttribut()
     {
         foreach ($this->listAttribut as $attr => $value) {
-            $this->listStrAttribut .= " " . $attr . "='" . $value . "'";
+            $this->listStrAttribut .= ' '.$attr."='".$value."'";
         }
         foreach ($this->listErrorAttribut as $attr => $value) {
-            $this->listStrErrorAttribut .= " " . $attr . "='" . $value . "'";
+            $this->listStrErrorAttribut .= ' '.$attr."='".$value."'";
         }
     }
 
     /**
-     * check if the widget is a groupWidget
-     * @return boolean
+     * check if the widget is a groupWidget.
+     *
+     * @return bool
      */
     public function isGroupWidget()
     {
@@ -190,7 +211,8 @@ abstract class Widget
     }
 
     /**
-     * check if the widget is mappable
+     * check if the widget is mappable.
+     *
      * @return true
      */
     public function isMappable()
@@ -199,7 +221,7 @@ abstract class Widget
     }
 
     /**
-     * check if widget is valid
+     * check if widget is valid.
      */
     abstract public function isValid();
 }

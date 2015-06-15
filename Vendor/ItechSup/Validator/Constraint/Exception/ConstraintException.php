@@ -2,11 +2,10 @@
 
 namespace ItechSup\Validator\Constraint\Exception;
 
-use \Exception;
+use Exception;
 
 class ConstraintException extends Exception
 {
-
     protected $message;
 
     public function __construct($message)
@@ -18,5 +17,4 @@ class ConstraintException extends Exception
     {
         return $this->message;
     }
-
 }

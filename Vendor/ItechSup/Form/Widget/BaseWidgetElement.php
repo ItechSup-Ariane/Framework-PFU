@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The base element contain the main élément for all widget
+ * The base element contain the main élément for all widget.
  */
 
 namespace ItechSup\Form\Widget;
@@ -12,7 +12,6 @@ use ItechSup\Validator\Validator\Validator;
 
 abstract class BaseWidgetElement extends Widget
 {
-
     protected $label;
     protected $value;
     protected $type;
@@ -24,7 +23,8 @@ abstract class BaseWidgetElement extends Widget
     private $validator;
 
     /**
-     * get the label
+     * get the label.
+     *
      * @return string
      */
     public function getLabel()
@@ -33,7 +33,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * set the label
+     * set the label.
+     *
      * @param name's label
      */
     public function setLabel($label)
@@ -42,7 +43,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * get the value
+     * get the value.
+     *
      * @return mixed
      */
     public function getValue()
@@ -51,7 +53,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * set the value
+     * set the value.
+     *
      * @param mixed $value
      */
     public function setValue($value)
@@ -60,7 +63,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * set the validator
+     * set the validator.
+     *
      * @param Validator $validator
      */
     public function setValidator(Validator $validator)
@@ -69,7 +73,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * get the validator
+     * get the validator.
+     *
      * @return Validator
      */
     public function getValidator()
@@ -78,7 +83,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * get the type
+     * get the type.
+     *
      * @return string
      */
     public function getType()
@@ -87,7 +93,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * get a view object
+     * get a view object.
+     *
      * @return ViewElementWidget
      */
     protected function getViewElement($value, array $error = [])
@@ -98,11 +105,13 @@ abstract class BaseWidgetElement extends Widget
         $view = new ViewElementWidget($value, $this->label, $error);
         $view->setLabelAttr($this->listStrErrorAttribut);
         $view->setErrorsAttr($this->listStrErrorAttribut);
+
         return $view;
     }
 
     /**
-     * get list label's attribut
+     * get list label's attribut.
+     *
      * @return array
      */
     public function getLabelAttributs()
@@ -111,7 +120,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * set list label's attribut
+     * set list label's attribut.
+     *
      * @param array $listAttribut
      */
     public function setLabelAttributs(array $listAttribut)
@@ -120,7 +130,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * clear list label's attribut
+     * clear list label's attribut.
+     *
      * @param array $listAttribut
      */
     public function clearLabelAttributs()
@@ -129,7 +140,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * get a attribut
+     * get a attribut.
+     *
      * @param string $nameAttr
      */
     public function getLabelAttribut($nameAttr)
@@ -138,8 +150,9 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * set a attribut
-     * @param string $nameAttr name's attribut
+     * set a attribut.
+     *
+     * @param string $nameAttr  name's attribut
      * @param string $valueAttr value's attribut
      */
     public function setLabelAttribut($nameAttr, $valueAttr)
@@ -148,8 +161,9 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * check if a attribut exist
-     * @return boolean
+     * check if a attribut exist.
+     *
+     * @return bool
      */
     public function hasLabelAttribut($nameAttr)
     {
@@ -157,7 +171,8 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * remove a attribut
+     * remove a attribut.
+     *
      * @param string name's attribut
      */
     public function removeLabelAttribut($nameAttr)
@@ -166,19 +181,20 @@ abstract class BaseWidgetElement extends Widget
     }
 
     /**
-     * prepare the list's attribut for the widget
+     * prepare the list's attribut for the widget.
      */
     protected function prepareAttribut()
     {
         parent::prepareAttribut();
         foreach ($this->listLabelAttribut as $attr => $value) {
-            $this->listStrErrorAttribut .= " " . $attr . "='" . $value . "'";
+            $this->listStrErrorAttribut .= ' '.$attr."='".$value."'";
         }
     }
 
     /**
-     * valid the widget
-     * @return boolean
+     * valid the widget.
+     *
+     * @return bool
      */
     public function isValid()
     {
@@ -186,11 +202,13 @@ abstract class BaseWidgetElement extends Widget
         if (!empty($this->validator)) {
             $isValid = $this->validator->isValid($this->value);
         }
+
         return $isValid;
     }
 
     /**
-     * build the render for the widget
+     * build the render for the widget.
+     *
      * @return ViewElementWidget
      */
     abstract public function getRenderWidget();

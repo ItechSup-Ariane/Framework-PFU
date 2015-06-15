@@ -7,8 +7,7 @@ use ItechSup\Validator\Constraint\Exception\ConstraintException;
 
 class ConstraintType extends Constraint
 {
-
-    protected $messageError = "The field must be a number";
+    protected $messageError = 'The field must be a number';
     private $type;
 
     public function __construct($type)
@@ -18,14 +17,12 @@ class ConstraintType extends Constraint
 
     public function isValid($value)
     {
-        $checker = "is_" . $this->type;
+        $checker = 'is_'.$this->type;
         if (function_exists($checker)) {
             if (!$checker($value)) {
                 throw new ConstraintException($this->messageError);
             }
         } else {
-            
         }
     }
-
 }

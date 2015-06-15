@@ -4,7 +4,6 @@ namespace Entity;
 
 class AdresseEntity
 {
-
     private $adresse;
     private $codePostal;
     private $ville;
@@ -38,5 +37,4 @@ class AdresseEntity
     {
         $this->ville = $ville;
     }
-
 }

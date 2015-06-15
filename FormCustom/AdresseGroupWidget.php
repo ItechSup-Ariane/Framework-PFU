@@ -10,7 +10,6 @@ use ItechSup\Validator\Validator\Validator;
 
 class AdresseGroupWidget extends GroupWidget
 {
-
     private $adresseWidget;
     private $codePostalWidget;
     private $villeWidget;
@@ -20,22 +19,22 @@ class AdresseGroupWidget extends GroupWidget
         $this->setDataMap($entity);
 
         $this->adresseWidget = new WidgetText();
-        $this->adresseWidget->setName("adresse");
-        $this->adresseWidget->setLabel("Adresse :");
-        $this->adresseWidget->setAttributs(array("class" => "form_text"));
-        $this->adresseWidget->setLabelAttributs(array("class" => "form_label"));
+        $this->adresseWidget->setName('adresse');
+        $this->adresseWidget->setLabel('Adresse :');
+        $this->adresseWidget->setAttributs(array('class' => 'form_text'));
+        $this->adresseWidget->setLabelAttributs(array('class' => 'form_label'));
 
         $this->codePostalWidget = new WidgetText();
-        $this->codePostalWidget->setName("codePostal");
-        $this->codePostalWidget->setLabel("Code postale :");
-        $this->codePostalWidget->setAttributs(array("class" => "form_text"));
-        $this->codePostalWidget->setLabelAttributs(array("class" => "form_label"));
+        $this->codePostalWidget->setName('codePostal');
+        $this->codePostalWidget->setLabel('Code postale :');
+        $this->codePostalWidget->setAttributs(array('class' => 'form_text'));
+        $this->codePostalWidget->setLabelAttributs(array('class' => 'form_label'));
 
         $this->villeWidget = new WidgetText();
-        $this->villeWidget->setName("ville");
-        $this->villeWidget->setLabel("Ville :");
-        $this->villeWidget->setAttributs(array("class" => "form_text"));
-        $this->villeWidget->setLabelAttributs(array("class" => "form_label"));
+        $this->villeWidget->setName('ville');
+        $this->villeWidget->setLabel('Ville :');
+        $this->villeWidget->setAttributs(array('class' => 'form_text'));
+        $this->villeWidget->setLabelAttributs(array('class' => 'form_label'));
 
         $validatorAdesse = new Validator();
         $validatorAdesse->addConstraint(new ConstraintNotNull());
@@ -50,10 +49,8 @@ class AdresseGroupWidget extends GroupWidget
         $this->codePostalWidget->setValidator($validatorCp);
         $this->villeWidget->setValidator($validatorVille);
 
-
-        $this->addWidget($this->adresseWidget, "adresse")
-                ->addWidget($this->codePostalWidget, "codePostal")
-                ->addWidget($this->villeWidget, "ville");
+        $this->addWidget($this->adresseWidget, 'adresse')
+                ->addWidget($this->codePostalWidget, 'codePostal')
+                ->addWidget($this->villeWidget, 'ville');
     }
-
 }

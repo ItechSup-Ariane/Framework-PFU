@@ -4,7 +4,6 @@ namespace ItechSup\AutoLaoder;
 
 class ClassLoader
 {
-
     private $listPrefix;
 
     public function register()
@@ -19,10 +18,10 @@ class ClassLoader
 
     public function loadClass($className)
     {
-        $file = str_replace("\\", DIRECTORY_SEPARATOR, $className);
-        $file .= ".php";
+        $file = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+        $file .= '.php';
         foreach ($this->listPrefix as $prefix) {
-            $this->requireFile($prefix . $file);
+            $this->requireFile($prefix.$file);
         }
     }
 
@@ -33,7 +32,7 @@ class ClassLoader
             require_once $file;
             $isRequire = true;
         }
+
         return $isRequire;
     }
-
 }

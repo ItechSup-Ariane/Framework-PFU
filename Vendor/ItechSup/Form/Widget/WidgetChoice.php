@@ -2,8 +2,6 @@
 
 namespace ItechSup\Form\Widget;
 
-use ItechSup\Form\Widget\BaseWidgetElement;
-
 /**
  * This widget enable the build differente type list.
  * This type are :
@@ -12,43 +10,45 @@ use ItechSup\Form\Widget\BaseWidgetElement;
  * <li>list with multiple choice</li>
  * <li>list button radio (list expanded)</li>
  * <li>list button checkbox (list expanded with multiple choice)</li>
- * </ul>
+ * </ul>.
  */
 class WidgetChoice extends BaseWidgetElement
 {
-
-    protected $type = "choice";
-    protected $typeList = "";
+    protected $type = 'choice';
+    protected $typeList = '';
     protected $choiceValue = array();
     protected $isExpanded = false;
     protected $isMappable = true;
-    protected $field = "";
+    protected $field = '';
 
     /**
-     * if true the list is multiple else if false is not multiple
-     * @return boolean
+     * if true the list is multiple else if false is not multiple.
+     *
+     * @return bool
      */
     public function isMultiple()
     {
-        return isset($this->listAttribut["multiple"]);
+        return isset($this->listAttribut['multiple']);
     }
 
     /**
-     * if true the list is multiple else if false is not multiple
+     * if true the list is multiple else if false is not multiple.
+     *
      * @param valeur boolean
      */
     public function setMultiple($isMultiple)
     {
-        if ($isMultiple === false && isset($this->listAttribut["multiple"])) {
-            unset($this->listAttribut["multiple"]);
-        } else if ($isMultiple === true) {
-            $this->listAttribut["multiple"] = "";
+        if ($isMultiple === false && isset($this->listAttribut['multiple'])) {
+            unset($this->listAttribut['multiple']);
+        } elseif ($isMultiple === true) {
+            $this->listAttribut['multiple'] = '';
         }
     }
 
     /**
-     * if true the list is expanded else if false is not expnded
-     * @return boolean
+     * if true the list is expanded else if false is not expnded.
+     *
+     * @return bool
      */
     public function isExpanded()
     {
@@ -56,8 +56,9 @@ class WidgetChoice extends BaseWidgetElement
     }
 
     /**
-     * 	if true the list is expanded else if false is not expnded
-     * @param boolean
+     * 	if true the list is expanded else if false is not expnded.
+     *
+     * @param bool
      */
     public function setExpanded($isExpanded)
     {
@@ -65,7 +66,8 @@ class WidgetChoice extends BaseWidgetElement
     }
 
     /**
-     * add fields in the list
+     * add fields in the list.
+     *
      * @param field's list
      */
     public function setChoiceValue(array $choiceValue)
@@ -74,7 +76,8 @@ class WidgetChoice extends BaseWidgetElement
     }
 
     /**
-     * add a field in the list
+     * add a field in the list.
+     *
      * @param nom du champ
      * @param valeur du champs
      */
@@ -84,7 +87,8 @@ class WidgetChoice extends BaseWidgetElement
     }
 
     /**
-     * delete a field in the list
+     * delete a field in the list.
+     *
      * @param name's field
      */
     public function removeChoiceValue($nameValue)
@@ -93,7 +97,7 @@ class WidgetChoice extends BaseWidgetElement
     }
 
     /**
-     * clear the list
+     * clear the list.
      */
     public function clearChoiceValue()
     {
@@ -101,21 +105,22 @@ class WidgetChoice extends BaseWidgetElement
     }
 
     /**
-     * return the list renderer
+     * return the list renderer.
+     *
      * @return ViewElementWidget
      */
     public function getRenderWidget()
     {
         if (empty($this->render)) {
             if ($this->isExpanded && $this->isMultiple()) {
-                $this->typeList = "checkbox";
+                $this->typeList = 'checkbox';
                 $this->getListCheck();
-            } else if ($this->isExpanded && !$this->isMultiple()) {
-                $this->typeList = "radio";
+            } elseif ($this->isExpanded && !$this->isMultiple()) {
+                $this->typeList = 'radio';
                 $this->getListCheck();
-            } else if (!$this->isExpanded && $this->isMultiple()) {
+            } elseif (!$this->isExpanded && $this->isMultiple()) {
                 $this->getListSelect();
-            } else if (!$this->isExpanded && !$this->isMultiple()) {
+            } elseif (!$this->isExpanded && !$this->isMultiple()) {
                 $this->getListSelect();
             }
         }
@@ -124,55 +129,57 @@ class WidgetChoice extends BaseWidgetElement
             $errors = $this->getValidator()->getListErrors();
         }
         $this->render = $this->getViewElement($this->field, $errors);
+
         return $this->render;
     }
 
     /**
-     * build the simple list  or multiple choices
+     * build the simple list  or multiple choices.
      */
     public function getListSelect()
     {
         $nameList = $this->name;
         if ($this->isMultiple()) {
-            $nameList .= "[]";
+            $nameList .= '[]';
         }
-        $this->field = "<select name=" . $nameList . " " . $this->listStrAttribut . ">";
+        $this->field = '<select name='.$nameList.' '.$this->listStrAttribut.'>';
         foreach ($this->choiceValue as $name => $value) {
-            $selected = "";
+            $selected = '';
             if ($this->isSelected($value)) {
-                $selected = "selected";
+                $selected = 'selected';
             }
-            $this->field .= "<option value='" . $value . "' " . $selected . ">" . $name . "</option>";
+            $this->field .= "<option value='".$value."' ".$selected.'>'.$name.'</option>';
         }
-        $this->field .= "</select>";
+        $this->field .= '</select>';
     }
 
     /**
-     * build extended list or extended with multiple choices 
+     * build extended list or extended with multiple choices.
      */
     public function getListCheck()
     {
         $nameList = $this->name;
         if ($this->isMultiple()) {
-            $nameList .= "[]";
+            $nameList .= '[]';
         }
         foreach ($this->choiceValue as $name => $value) {
-            $isChecked = "";
+            $isChecked = '';
             if ($this->isSelected($value)) {
-                $isChecked = "checked";
+                $isChecked = 'checked';
             }
-            $this->field .= "<label>" . $name . "</label><input name='" . $nameList
-                    . "' value='" . $value . "'"
-                    . " " . $isChecked
-                    . " type='" . $this->typeList . "' "
-                    . $this->listStrAttribut
-                    . " />";
+            $this->field .= '<label>'.$name."</label><input name='".$nameList
+                    ."' value='".$value."'"
+                    .' '.$isChecked
+                    ." type='".$this->typeList."' "
+                    .$this->listStrAttribut
+                    .' />';
         }
     }
 
     /**
-     * check if value is selected in the list
-     * @return boolean
+     * check if value is selected in the list.
+     *
+     * @return bool
      */
     private function isSelected($value)
     {
@@ -184,7 +191,7 @@ class WidgetChoice extends BaseWidgetElement
                 $isSelected = true;
             }
         }
+
         return $isSelected;
     }
-
 }

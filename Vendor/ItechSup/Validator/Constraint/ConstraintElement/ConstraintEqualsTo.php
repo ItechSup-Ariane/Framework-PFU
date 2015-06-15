@@ -6,8 +6,7 @@ use ItechSup\Validator\Constraint\Constraint;
 
 class ConstraintEqualsTo extends Constraint
 {
-
-    protected $messageError = "invalid";
+    protected $messageError = 'invalid';
     protected $compareTo;
 
     public function __construct($compareTo)
@@ -24,5 +23,4 @@ class ConstraintEqualsTo extends Constraint
             $this->validator->setError($this->messageError);
         }
     }
-
 }

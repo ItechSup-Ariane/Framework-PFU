@@ -12,18 +12,18 @@ use Entity\PersonneEntity;
 $personne = new PersonneEntity();
 $form = new FormCustom($personne);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $form->setBindData($_POST);
     $isValid = $form->isValid();
     if ($isValid) {
         var_dump($form->getData());
-        $result = "Formulaire valide";
+        $result = 'Formulaire valide';
     } else {
-        $result = "Formaulaire invalide";
+        $result = 'Formaulaire invalide';
     }
 }
 $form->prepare();
-$personneRender = $form->getRender("personneGroupWidget");
+$personneRender = $form->getRender('personneGroupWidget');
 ?>
 <!DOCTYPE html5>
 <html>
@@ -40,34 +40,35 @@ $personneRender = $form->getRender("personneGroupWidget");
     <body>
         <?= $form->openForm(); ?>
         <div class="form_block">
-            <?= $personneRender["nom"]->getLabel() ?>
-            <?= $personneRender["nom"]->getValue() ?>
+            <?= $personneRender['nom']->getLabel() ?>
+            <?= $personneRender['nom']->getValue() ?>
             <div class="form_error">
-                <?= $personneRender["nom"]->getError() ?>
+                <?= $personneRender['nom']->getError() ?>
             </div>
         </div>
         <div class="form_block">
-            <?= $personneRender["active"]->getLabel() ?>
-            <?= $personneRender["active"]->getValue() ?>
+            <?= $personneRender['active']->getLabel() ?>
+            <?= $personneRender['active']->getValue() ?>
             <div class="form_error">
-                <?= $personneRender["active"]->getError() ?>
+                <?= $personneRender['active']->getError() ?>
             </div>
         </div>
         <div class="form_block">
-            <?= $personneRender["nbEnfant"]->getLabel() ?>
-            <?= $personneRender["nbEnfant"]->getValue() ?>
+            <?= $personneRender['nbEnfant']->getLabel() ?>
+            <?= $personneRender['nbEnfant']->getValue() ?>
             <div class="form_error">
-                <?= $personneRender["nbEnfant"]->getError() ?>
+                <?= $personneRender['nbEnfant']->getError() ?>
             </div>
         </div>
         <div class="form_block">
-            <?= $personneRender["poste"]->getLabel() ?>
-            <?= $personneRender["poste"]->getValue() ?>
+            <?= $personneRender['poste']->getLabel() ?>
+            <?= $personneRender['poste']->getValue() ?>
             <div class="form_error">
-                <?= $personneRender["nbEnfant"]->getError() ?>
+                <?= $personneRender['nbEnfant']->getError() ?>
             </div>
         </div>
-        <?php foreach ($personneRender["adresse"] as $adresse) { ?>
+        <?php foreach ($personneRender['adresse'] as $adresse) {
+    ?>
             <div class="form_block">
                 <?= $adresse->getLabel() ?>
                 <?= $adresse->getValue() ?>
@@ -75,9 +76,11 @@ $personneRender = $form->getRender("personneGroupWidget");
                     <?= $adresse->getError() ?>
                 </div>
             </div>
-        <?php } ?>
+        <?php
+
+} ?>
         <div class="form_block">
-            <?= $form->getRender("button")->getValue() ?>
+            <?= $form->getRender('button')->getValue() ?>
         </div>
         <?= $form->closeForm(); ?>
     </body>

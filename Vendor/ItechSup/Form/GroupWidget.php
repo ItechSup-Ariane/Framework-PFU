@@ -2,7 +2,6 @@
 
 namespace ItechSup\Form;
 
-use ItechSup\Form\Widget;
 use ItechSup\Form\Exception\FormException;
 
 /**
@@ -10,9 +9,8 @@ use ItechSup\Form\Exception\FormException;
  */
 class GroupWidget extends Widget
 {
-
-    private static $array = "array";
-    private static $obj = "object";
+    private static $array = 'array';
+    private static $obj = 'object';
     protected $listWidget;
     protected $dataMap;
     protected $typeDataMap;
@@ -21,8 +19,10 @@ class GroupWidget extends Widget
 
     /**
      * add a Widget object.
-     * @param Widget $widget 
+     *
+     * @param Widget $widget
      * @param string $title
+     *
      * @return GroupWidget return the current object
      */
     public function addWidget(Widget $widget, $title)
@@ -34,12 +34,15 @@ class GroupWidget extends Widget
             $this->isMappedGetterObject($title);
         }
         $this->listWidget[$title] = $widget;
+
         return $this;
     }
 
     /**
-     * get a widget
+     * get a widget.
+     *
      * @param string $title
+     *
      * @return Widget
      */
     public function getWidget($title)
@@ -48,8 +51,10 @@ class GroupWidget extends Widget
     }
 
     /**
-     * check if a widget exist
+     * check if a widget exist.
+     *
      * @param string $title
+     *
      * @return Widget
      */
     public function hasWidget($title)
@@ -58,7 +63,8 @@ class GroupWidget extends Widget
     }
 
     /**
-     * remove a widget exist
+     * remove a widget exist.
+     *
      * @param string $title
      */
     public function removeWidget($title)
@@ -67,7 +73,8 @@ class GroupWidget extends Widget
     }
 
     /**
-     * clear the list widget
+     * clear the list widget.
+     *
      * @param string $title
      */
     public function clearWidgets($title)
@@ -77,6 +84,7 @@ class GroupWidget extends Widget
 
     /**
      * set a object or a array for map the data.
+     *
      * @param object|array $dataMap
      */
     public function setDataMap($dataMap)
@@ -90,55 +98,57 @@ class GroupWidget extends Widget
     }
 
     /**
-     * get the data with data mappad 
+     * get the data with data mappad.
+     *
      * @return object|array
      */
     public function getData()
     {
         if ($this->typeDataMap == self::$obj) {
             $this->hydrateObject();
-        } else if ($this->typeDataMap == self::$array) {
+        } elseif ($this->typeDataMap == self::$array) {
             $this->hydrateArray();
         }
+
         return $this->dataMap;
     }
 
     /**
-     * 
+     *
      */
     protected function isMappedKeyArray($key)
     {
         if (!array_key_exists($key, $this->dataMap)) {
-            throw new FormException($key . " is not mapped in Array");
+            throw new FormException($key.' is not mapped in Array');
         }
     }
 
     /**
-     * 
+     *
      */
     protected function isMappedGetterObject($getter)
     {
         $isExists = false;
         $ucfGetter = ucfirst($getter);
-        $listPrefixGetter = ["get", "is", "has"];
+        $listPrefixGetter = ['get', 'is', 'has'];
         foreach ($listPrefixGetter as $prefixGetter) {
-            if (method_exists($this->dataMap, $prefixGetter . $ucfGetter)) {
+            if (method_exists($this->dataMap, $prefixGetter.$ucfGetter)) {
                 $isExists = true;
                 break;
             }
         }
         if (!$isExists) {
-            throw new FormException($getter . " is not mapped in " . get_class($this->dataMap));
+            throw new FormException($getter.' is not mapped in '.get_class($this->dataMap));
         }
     }
 
     /**
-     * build a object with data mapped
+     * build a object with data mapped.
      */
     protected function hydrateObject()
     {
         foreach ($this->listWidget as $widget) {
-            $setter = "set" . ucfirst($widget->getName());
+            $setter = 'set'.ucfirst($widget->getName());
             if ($widget->isMappable()) {
                 $this->dataMap->$setter($widget->getValue());
             } elseif ($widget->isGroupWidget()) {
@@ -148,7 +158,7 @@ class GroupWidget extends Widget
     }
 
     /**
-     * build a array with data mapped
+     * build a array with data mapped.
      */
     protected function hydrateArray()
     {
@@ -162,17 +172,18 @@ class GroupWidget extends Widget
     }
 
     /**
-     * check if the name's widget is valid
+     * check if the name's widget is valid.
      */
     protected function validNameWidget($nameWidget, $title)
     {
         if (!($nameWidget == $title)) {
-            throw new FormException("The widget name and title is invalid");
+            throw new FormException('The widget name and title is invalid');
         }
     }
 
     /**
-     * set the bind data. The bind data is the value return by user
+     * set the bind data. The bind data is the value return by user.
+     *
      * @param array
      */
     public function setBindData(array $request)
@@ -187,7 +198,8 @@ class GroupWidget extends Widget
     }
 
     /**
-     * get the list list with the widget render
+     * get the list list with the widget render.
+     *
      * @return array
      */
     public function getRenderWidget()
@@ -197,12 +209,13 @@ class GroupWidget extends Widget
             $widget->prepareAttribut();
             $listWidgetRender[$widget->getName()] = $widget->getRenderWidget();
         }
+
         return $listWidgetRender;
     }
 
     /**
      * check if the widget is valid
-     * return boolean
+     * return boolean.
      */
     public function isValid()
     {
@@ -212,7 +225,7 @@ class GroupWidget extends Widget
                 $isValid = false;
             }
         }
+
         return $isValid;
     }
-
 }

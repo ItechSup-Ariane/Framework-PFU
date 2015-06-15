@@ -2,11 +2,10 @@
 
 namespace ItechSup\Validator\Validator\Exception;
 
-use \Exception;
+use Exception;
 
 class ValidatorException extends Exception
 {
-
     public function __construct($message)
     {
         parent::__construct($message);
@@ -16,5 +15,4 @@ class ValidatorException extends Exception
     {
         return $this->message;
     }
-
 }

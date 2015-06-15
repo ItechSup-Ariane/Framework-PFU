@@ -2,34 +2,31 @@
 
 namespace ItechSup\Form\Widget;
 
-use ItechSup\Form\Widget\BaseWidgetElement;
-
 class WidgetCheckBox extends BaseWidgetElement
 {
-
-    protected $type = "checkbox";
+    protected $type = 'checkbox';
     protected $isMappable = true;
 
     public function getRenderWidget()
     {
         if (empty($this->render)) {
-            $isChecked = "";
+            $isChecked = '';
             if ($this->type) {
-                $isChecked = "checked";
+                $isChecked = 'checked';
             }
-            $field = "<input name='" . $this->name
-                    . "' value='true'"
-                    . " " . $isChecked
-                    . "' type='" . $this->type . "' "
-                    . $this->listStrAttribut
-                    . " />";
+            $field = "<input name='".$this->name
+                    ."' value='true'"
+                    .' '.$isChecked
+                    ."' type='".$this->type."' "
+                    .$this->listStrAttribut
+                    .' />';
             $errors = [];
             if (!empty($this->getValidator())) {
                 $errors = $this->getValidator()->getListErrors();
             }
             $this->render = $this->getViewElement($field, $errors);
         }
+
         return $this->render;
     }
-
 }

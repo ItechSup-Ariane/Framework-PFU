@@ -7,7 +7,6 @@ use ItechSup\Validator\Constraint\Constraint;
 
 class Validator
 {
-
     private $listConstraint;
     private $listError;
 
@@ -54,6 +53,7 @@ class Validator
                 $isValid = false;
             }
         }
+
         return $isValid;
     }
 
@@ -61,5 +61,4 @@ class Validator
     {
         return $this->listError;
     }
-
 }
