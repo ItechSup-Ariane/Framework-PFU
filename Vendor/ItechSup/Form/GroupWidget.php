@@ -11,8 +11,8 @@ use ItechSup\Form\Exception\FormException;
 class GroupWidget extends Widget
 {
 
-    private static $ARRAY = "array";
-    private static $OBJ = "object";
+    private static $array = "array";
+    private static $obj = "object";
     protected $listWidget;
     protected $dataMap;
     protected $typeDataMap;
@@ -28,9 +28,9 @@ class GroupWidget extends Widget
     public function addWidget(Widget $widget, $title)
     {
         $this->validNameWidget($widget->getName(), $title);
-        if ($this->typeDataMap == self::$ARRAY && $widget->isMappable()) {
+        if ($this->typeDataMap == self::$array && $widget->isMappable()) {
             $this->isMappedKeyArray($title);
-        } elseif ($this->typeDataMap == self::$OBJ && $widget->isMappable()) {
+        } elseif ($this->typeDataMap == self::$obj && $widget->isMappable()) {
             $this->isMappedGetterObject($title);
         }
         $this->listWidget[$title] = $widget;
@@ -83,9 +83,9 @@ class GroupWidget extends Widget
     {
         $this->dataMap = $dataMap;
         if (is_array($dataMap)) {
-            $this->typeDataMap = self::$ARRAY;
+            $this->typeDataMap = self::$array;
         } elseif (is_object($dataMap)) {
-            $this->typeDataMap = self::$OBJ;
+            $this->typeDataMap = self::$obj;
         }
     }
 
@@ -95,9 +95,9 @@ class GroupWidget extends Widget
      */
     public function getData()
     {
-        if ($this->typeDataMap == self::$OBJ) {
+        if ($this->typeDataMap == self::$obj) {
             $this->hydrateObject();
-        } else {
+        } else if ($this->typeDataMap == self::$array) {
             $this->hydrateArray();
         }
         return $this->dataMap;

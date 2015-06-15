@@ -39,7 +39,11 @@ class WidgetChoice extends BaseWidgetElement
      */
     public function setMultiple($isMultiple)
     {
-        $this->listAttribut["multiple"] = "";
+        if ($isMultiple === false && isset($this->listAttribut["multiple"])) {
+            unset($this->listAttribut["multiple"]);
+        } else if ($isMultiple === true) {
+            $this->listAttribut["multiple"] = "";
+        }
     }
 
     /**

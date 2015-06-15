@@ -18,7 +18,7 @@ abstract class BaseWidgetElement extends Widget
     protected $type;
     protected $render;
     protected $listLabelAttribut = array();
-    protected $listStringLabelAttribut;
+    protected $listStrErrorAttribut;
     protected $isGroupWidget = false;
     protected $isMappable = false;
     private $validator;
@@ -38,7 +38,7 @@ abstract class BaseWidgetElement extends Widget
      */
     public function setLabel($label)
     {
-        $this->label = $value;
+        $this->label = $label;
     }
 
     /**
@@ -92,13 +92,11 @@ abstract class BaseWidgetElement extends Widget
      */
     protected function getViewElement($value, array $error = [])
     {
-        if (!empty($this->label)) {
-            $label = $this->label;
-        } else {
-            $label = $this->name;
+        if (empty($this->label)) {
+            $this->label = $this->name;
         }
-        $view = new ViewElementWidget($value, $label, $error);
-        $view->setLabelAttr($this->listStringLabelAttribut);
+        $view = new ViewElementWidget($value, $this->label, $error);
+        $view->setLabelAttr($this->listStrErrorAttribut);
         $view->setErrorsAttr($this->listStringErrorAttribut);
         return $view;
     }
@@ -174,7 +172,7 @@ abstract class BaseWidgetElement extends Widget
     {
         parent::prepareAttribut();
         foreach ($this->listLabelAttribut as $attr => $value) {
-            $this->listStringLabelAttribut .= " " . $attr . "='" . $value . "'";
+            $this->listStrErrorAttribut .= " " . $attr . "='" . $value . "'";
         }
     }
 

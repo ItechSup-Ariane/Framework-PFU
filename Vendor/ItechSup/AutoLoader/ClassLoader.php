@@ -19,10 +19,10 @@ class ClassLoader
 
     public function loadClass($className)
     {
-        $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
-        $className .= ".php";
+        $file = str_replace("\\", DIRECTORY_SEPARATOR, $className);
+        $file .= ".php";
         foreach ($this->listPrefix as $prefix) {
-            $this->requireFile($prefix . $className);
+            $this->requireFile($prefix . $file);
         }
     }
 

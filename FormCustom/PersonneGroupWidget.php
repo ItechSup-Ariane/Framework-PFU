@@ -18,7 +18,6 @@ class PersonneGroupWidget extends GroupWidget
 {
 
     private $nomWidget;
-    private $statusWidget;
     private $nbEnfantWidget;
     private $isActiveWidget;
     private $adresseGroupWidget;

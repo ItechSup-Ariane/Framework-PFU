@@ -6,7 +6,7 @@ class AdresseEntity
 {
 
     private $adresse;
-    private $cp;
+    private $codePostal;
     private $ville;
 
     public function getAdresse()
@@ -14,9 +14,9 @@ class AdresseEntity
         return $this->adresse;
     }
 
-    public function getCp()
+    public function getCodePostal()
     {
-        return $this->cp;
+        return $this->codePostal;
     }
 
     public function getVille()
@@ -29,9 +29,9 @@ class AdresseEntity
         $this->adresse = $adresse;
     }
 
-    public function setCp($cp)
+    public function setCodePostal($codePostal)
     {
-        $this->cp = $cp;
+        $this->codePostal = $codePostal;
     }
 
     public function setVille($ville)

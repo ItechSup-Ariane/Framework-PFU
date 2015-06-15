@@ -16,18 +16,16 @@ class Form extends GroupWidget
         if ($this->isPrepare) {
             $form = '<form' . $this->listStringAttribut . '>';
             return $form;
-        } else {
-            throw new FormException('The form ' . get_class($this) . 'is not prepare');
         }
+        throw new FormException('The form ' . get_class($this) . 'is not prepare');
     }
 
     public function closeForm()
     {
         if ($this->isPrepare) {
             return '</form>';
-        } else {
-            throw new FormException('The form ' . get_class($this) . 'is not prepare');
         }
+        throw new FormException('The form ' . get_class($this) . 'is not prepare');
     }
 
     public function prepare()
@@ -39,9 +37,8 @@ class Form extends GroupWidget
                 $this->listRender[$widget->getName()] = $widget->getRenderWidget();
             }
             $this->isPrepare = true;
-        } else {
-            throw new FormException('The form ' . get_class($this) . ' is already prepare');
         }
+        throw new FormException('The form ' . get_class($this) . ' is already prepare');
     }
 
     public function getRender($nameWidget)
@@ -49,12 +46,10 @@ class Form extends GroupWidget
         if ($this->isPrepare) {
             if (array_key_exists($nameWidget, $this->listRender)) {
                 return $this->listRender[$nameWidget];
-            } else {
-                throw new FormException('The widget\'s name ' . $nameWidget . ' is not exists');
             }
-        } else {
-            throw new FormException('The form ' . get_class($this) . ' is not prepare');
+            throw new FormException('The widget\'s name ' . $nameWidget . ' is not exists');
         }
+        throw new FormException('The form ' . get_class($this) . ' is not prepare');
     }
 
 }
